@@ -22,6 +22,23 @@ from src.summary_generator import create_summary, generate_text_report
 setup_logging()
 logger = get_logger(__name__)
 
+EMOTION_PT = {
+    "Angry": "Raiva",
+    "Disgust": "Nojo",
+    "Fear": "Medo",
+    "Happy": "Feliz",
+    "Sad": "Triste",
+    "Surprise": "Surpresa",
+    "Neutral": "Neutro",
+}
+
+ACTIVITY_PT = {
+    "Static": "Estático",
+    "Moderate Movement": "Movimento Moderado",
+    "Rapid Movement": "Movimento Rápido",
+    "Unknown": "Desconhecido",
+}
+
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -58,9 +75,12 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
 
         if emotions and i < len(emotions):
             emotion = emotions[i]
-            label = f"{emotion.emotion_label.value}: {emotion.confidence:.2f}"
+            emotion_pt = EMOTION_PT.get(
+                emotion.emotion_label.value, emotion.emotion_label.value
+            )
+            label = f"{emotion_pt}: {emotion.confidence:.2f}"
         else:
-            label = f"Face {face.face_id}"
+            label = f"Rosto {face.face_id}"
 
         cv2.putText(
             frame,
@@ -73,7 +93,8 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
         )
 
     if activity_info:
-        activity_text = f"Activity: {activity_info}"
+        activity_pt = ACTIVITY_PT.get(activity_info, activity_info)
+        activity_text = f"Atividade: {activity_pt}"
         cv2.putText(
             frame,
             activity_text,
@@ -86,7 +107,7 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
 
     cv2.putText(
         frame,
-        f"Frame: {frame_count} | Faces: {len(faces)}",
+        f"Quadro: {frame_count} | Rostos: {len(faces)}",
         (10, 60),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.7,
