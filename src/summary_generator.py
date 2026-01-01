@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Dict
 from collections import Counter
 
-from utils import get_logger
+from src.utils import get_logger
 
 logger = get_logger(__name__)
 

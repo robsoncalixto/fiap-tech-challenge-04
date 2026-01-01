@@ -3,16 +3,21 @@ Configuration file for Video Facial Analysis System
 Contains constants and default settings
 """
 
-import os
+from pathlib import Path
+
+# Project root directory (parent of src/)
+PROJECT_ROOT = Path(__file__).parent.parent
 
 # Paths
-INPUT_VIDEO_PATH = "data/Facial_Recognition_Diverse_Activities_Analysis.mp4"
-OUTPUT_DIR = "data/outputs/"
-MODELS_DIR = "models/"
+INPUT_VIDEO_PATH = (
+    PROJECT_ROOT / "data" / "Facial_Recognition_Diverse_Activities_Analysis.mp4"
+)
+OUTPUT_DIR = PROJECT_ROOT / "data" / "outputs"
+MODELS_DIR = PROJECT_ROOT / "models"
 
 # Models
-EMOTION_MODEL_PATH = os.path.join(MODELS_DIR, "emotion_model.h5")
-ANOMALY_MODEL_PATH = os.path.join(MODELS_DIR, "anomaly_model.pkl")
+EMOTION_MODEL_PATH = MODELS_DIR / "emotion_model.h5"
+ANOMALY_MODEL_PATH = MODELS_DIR / "anomaly_model.pkl"
 
 # Face Detection
 FACE_DETECTION_CONFIDENCE = 0.5

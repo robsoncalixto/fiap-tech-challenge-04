@@ -6,18 +6,18 @@ import sys
 import argparse
 import cv2
 
-import config
-from utils import (
+from src import config
+from src.utils import (
     setup_logging,
     get_logger,
     validate_file_exists,
     ensure_directory_exists,
 )
-from video_processor import load_video, get_video_info, extract_frames
-from face_detector import initialize_detector, detect_faces
-from emotion_analyzer import load_emotion_model, batch_analyze_emotions
-from activity_detector import initialize_activity_detector, analyze_motion
-from anomaly_detector import (
+from src.video_processor import load_video, get_video_info, extract_frames
+from src.face_detector import initialize_detector, detect_faces
+from src.emotion_analyzer import load_emotion_model, batch_analyze_emotions
+from src.activity_detector import initialize_activity_detector, analyze_motion
+from src.anomaly_detector import (
     train_anomaly_model,
     load_anomaly_model,
     save_anomaly_model,
@@ -25,7 +25,7 @@ from anomaly_detector import (
     classify_anomaly_type,
     create_anomaly_record,
 )
-from summary_generator import create_summary, generate_text_report
+from src.summary_generator import create_summary, generate_text_report
 
 # Setup logging
 setup_logging()

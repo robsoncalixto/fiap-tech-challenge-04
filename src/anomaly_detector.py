@@ -10,8 +10,8 @@ from dataclasses import dataclass
 from typing import List, Optional, Dict
 from sklearn.ensemble import IsolationForest
 
-from utils import get_logger
-import config
+from src.utils import get_logger
+from src import config
 
 logger = get_logger(__name__)
 

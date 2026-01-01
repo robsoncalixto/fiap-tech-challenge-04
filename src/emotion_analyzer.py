@@ -7,7 +7,7 @@ from enum import Enum
 from dataclasses import dataclass
 from typing import List, Dict, Optional
 
-from utils import get_logger, EmotionAnalysisError
+from src.utils import get_logger, EmotionAnalysisError
 
 logger = get_logger(__name__)
 

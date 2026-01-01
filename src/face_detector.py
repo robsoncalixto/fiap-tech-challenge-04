@@ -7,7 +7,7 @@ from typing import List, Tuple
 from dataclasses import dataclass
 import numpy as np
 
-from utils import get_logger, FaceDetectionError
+from src.utils import get_logger, FaceDetectionError
 
 logger = get_logger(__name__)
 
