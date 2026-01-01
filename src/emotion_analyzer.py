@@ -38,16 +38,16 @@ _emotion_model = None
 
 def load_emotion_model(model_path: Optional[str] = None) -> object:
     """
-    Load emotion classification model
+    Load emotion classification model using FER library
 
     Args:
-        model_path: Path to the emotion model file (optional)
+        model_path: Path to the emotion model file (optional, not used with FER)
 
     Returns:
-        Loaded emotion model
+        Loaded FER emotion model
 
     Raises:
-        EmotionAnalysisError: If model cannot be loaded
+        EmotionAnalysisError: If FER library is not available
     """
     global _emotion_model
 
@@ -55,22 +55,16 @@ def load_emotion_model(model_path: Optional[str] = None) -> object:
         return _emotion_model
 
     try:
-        # Try to use FER library if available
-        try:
-            from fer import FER
+        from fer.fer import FER
 
-            _emotion_model = FER(mtcnn=False)
-            logger.info("Emotion model loaded successfully using FER library")
-            return _emotion_model
-        except ImportError:
-            logger.warning(
-                "FER library not available, using fallback emotion detection"
-            )
-            # Fallback: use simple heuristic-based emotion detection
-            _emotion_model = "heuristic"
-            logger.info("Using heuristic-based emotion detection")
-            return _emotion_model
-
+        _emotion_model = FER(mtcnn=False)
+        logger.info("Emotion model loaded successfully using FER library")
+        return _emotion_model
+    except ImportError:
+        raise EmotionAnalysisError(
+            "FER library is required but not installed. "
+            "Install it with: pip install fer"
+        )
     except Exception as e:
         raise EmotionAnalysisError(f"Error loading emotion model: {e}")
 
@@ -79,93 +73,67 @@ def analyze_emotion(
     face_image: np.ndarray, model: object = None
 ) -> EmotionClassification:
     """
-    Analyze emotion from a face image
+    Analyze emotion from a face image using FER library
 
     Args:
         face_image: Face image (48x48 grayscale or BGR)
-        model: Emotion model (if None, will load default)
+        model: FER emotion model (if None, will load default)
 
     Returns:
         EmotionClassification with detected emotion
+
+    Raises:
+        EmotionAnalysisError: If emotion detection fails
     """
     if model is None:
         model = load_emotion_model()
 
-    # If using FER library
-    if hasattr(model, "detect_emotions"):
-        try:
-            # Convert grayscale to BGR if needed
-            if len(face_image.shape) == 2:
-                face_bgr = np.stack([face_image] * 3, axis=-1)
-            else:
-                face_bgr = face_image
+    if not hasattr(model, "detect_emotions"):
+        raise EmotionAnalysisError("Invalid emotion model")
 
-            emotions = model.detect_emotions(face_bgr)
+    try:
+        # Convert grayscale to BGR if needed
+        if len(face_image.shape) == 2:
+            face_bgr = np.stack([face_image] * 3, axis=-1)
+        else:
+            face_bgr = face_image
 
-            if emotions and len(emotions) > 0:
-                emotion_scores = emotions[0]["emotions"]
+        emotions = model.detect_emotions(face_bgr)
 
-                # Map FER emotions to our EmotionType
-                emotion_mapping = {
-                    "angry": EmotionType.ANGRY,
-                    "disgust": EmotionType.DISGUST,
-                    "fear": EmotionType.FEAR,
-                    "happy": EmotionType.HAPPY,
-                    "sad": EmotionType.SAD,
-                    "surprise": EmotionType.SURPRISE,
-                    "neutral": EmotionType.NEUTRAL,
-                }
+        if emotions and len(emotions) > 0:
+            emotion_scores = emotions[0]["emotions"]
 
-                probabilities = {
-                    emotion_mapping[k]: v for k, v in emotion_scores.items()
-                }
+            # Map FER emotions to our EmotionType
+            emotion_mapping = {
+                "angry": EmotionType.ANGRY,
+                "disgust": EmotionType.DISGUST,
+                "fear": EmotionType.FEAR,
+                "happy": EmotionType.HAPPY,
+                "sad": EmotionType.SAD,
+                "surprise": EmotionType.SURPRISE,
+                "neutral": EmotionType.NEUTRAL,
+            }
 
-                max_emotion = max(probabilities.items(), key=lambda x: x[1])
+            probabilities = {emotion_mapping[k]: v for k, v in emotion_scores.items()}
 
-                return EmotionClassification(
-                    emotion_label=max_emotion[0],
-                    confidence=max_emotion[1],
-                    probabilities=probabilities,
-                )
-        except Exception as e:
-            logger.warning(f"FER detection failed: {e}, using fallback")
+            max_emotion = max(probabilities.items(), key=lambda x: x[1])
 
-    # Fallback: heuristic-based detection (simple random for demo)
-    return _heuristic_emotion_detection(face_image)
-
-
-def _heuristic_emotion_detection(face_image: np.ndarray) -> EmotionClassification:
-    """
-    Fallback heuristic-based emotion detection
-    Uses simple image statistics as a demo
-    """
-    # Calculate mean brightness as a simple heuristic
-    mean_brightness = np.mean(face_image)
-
-    # Simple heuristic: brighter faces tend to be happier
-    if mean_brightness > 140:
-        dominant_emotion = EmotionType.HAPPY
-        confidence = 0.6
-    elif mean_brightness > 100:
-        dominant_emotion = EmotionType.NEUTRAL
-        confidence = 0.7
-    else:
-        dominant_emotion = EmotionType.SAD
-        confidence = 0.5
-
-    # Create probability distribution
-    probabilities = {emotion: 0.1 for emotion in EmotionType}
-    probabilities[dominant_emotion] = confidence
-
-    # Normalize probabilities
-    total = sum(probabilities.values())
-    probabilities = {k: v / total for k, v in probabilities.items()}
-
-    return EmotionClassification(
-        emotion_label=dominant_emotion,
-        confidence=confidence,
-        probabilities=probabilities,
-    )
+            return EmotionClassification(
+                emotion_label=max_emotion[0],
+                confidence=max_emotion[1],
+                probabilities=probabilities,
+            )
+        else:
+            # FER didn't detect any emotion - return neutral with low confidence
+            logger.warning("FER did not detect any emotion in the face image")
+            probabilities = {emotion: 1.0 / 7 for emotion in EmotionType}
+            return EmotionClassification(
+                emotion_label=EmotionType.NEUTRAL,
+                confidence=0.3,
+                probabilities=probabilities,
+            )
+    except Exception as e:
+        raise EmotionAnalysisError(f"Emotion detection failed: {e}")
 
 
 def batch_analyze_emotions(
