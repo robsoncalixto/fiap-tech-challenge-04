@@ -57,7 +57,7 @@ def load_emotion_model(model_path: Optional[str] = None) -> object:
     try:
         from fer.fer import FER
 
-        _emotion_model = FER(mtcnn=False)
+        _emotion_model = FER(mtcnn=True)
         logger.info("Emotion model loaded successfully using FER library")
         return _emotion_model
     except ImportError:

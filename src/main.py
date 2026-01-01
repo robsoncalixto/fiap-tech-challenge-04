@@ -33,9 +33,9 @@ EMOTION_PT = {
 }
 
 ACTIVITY_PT = {
-    "Static": "Estático",
+    "Static": "Estatico",
     "Moderate Movement": "Movimento Moderado",
-    "Rapid Movement": "Movimento Rápido",
+    "Rapid Movement": "Movimento Rapido",
     "Unknown": "Desconhecido",
 }
 
@@ -121,7 +121,7 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
 def main():
     args = parse_arguments()
 
-    logger.info("=== Sistema de Análise de Expressões Faciais em Vídeo ===")
+    logger.info("=== Análise de Expressões Faciais ===")
     logger.info("Iniciando processamento...")
 
     if not validate_file_exists(args.input):
