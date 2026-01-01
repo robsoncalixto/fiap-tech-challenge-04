@@ -91,7 +91,7 @@ data/
 #### Execução Básica (Configuração Padrão)
 
 ```bash
-python main.py
+python -m src.main
 ```
 
 Esta execução:
@@ -102,19 +102,19 @@ Esta execução:
 #### Execução com Diretório de Entrada Customizado
 
 ```bash
-python main.py --input caminho/para/seu/video.mp4
+python -m src.main --input caminho/para/seu/video.mp4
 ```
 
 #### Especificar Diretório de Saída
 
 ```bash
-python main.py --output data/resultados/
+python -m src.main --output data/resultados/
 ```
 
 #### Executar Sem Gerar Vídeo de Saída (Apenas Relatório)
 
 ```bash
-python main.py --no-output-video
+python -m src.main --no-output-video
 ```
 
 ### Parâmetros da Linha de Comando
@@ -129,7 +129,7 @@ python main.py --no-output-video
 
 ```bash
 # Processar vídeo específico e salvar em diretório customizado
-python main.py \
+python -m src.main \
   --input videos/meu_video.mp4 \
   --output resultados/analise_01/
 ```
@@ -231,17 +231,24 @@ Tempo de Processamento: 300.5 segundos
 
 ## Arquitetura
 
-### Descrição dos Módulos
+### Estrutura do Projeto
 
-- `main.py` - Orquestração Principal
-- `video_processor.py` - Processamento de Vídeo
-- `face_detector.py` - Detecção Facial
-- `emotion_analyzer.py` - Análise de Emoções
-- `activity_detector.py` - Detecção de Atividades
-- `anomaly_detector.py` - Detecção de Anomalias
-- `summary_generator.py` - Geração de Relatórios
-- `config.py` - Configurações
-- `utils.py` - Utilitários
+```
+fiap-tech-challenge-04/
+├── src/                    # Código fonte da aplicação
+│   ├── main.py            # Orquestração Principal
+│   ├── video_processor.py # Processamento de Vídeo
+│   ├── face_detector.py   # Detecção Facial
+│   ├── emotion_analyzer.py # Análise de Emoções
+│   ├── activity_detector.py # Detecção de Atividades
+│   ├── anomaly_detector.py # Detecção de Anomalias
+│   ├── summary_generator.py # Geração de Relatórios
+│   ├── config.py          # Configurações
+│   └── utils.py           # Utilitários
+├── data/                   # Dados de entrada e saída
+├── models/                 # Modelos treinados
+└── doc/                    # Documentação
+```
 
 ---
 

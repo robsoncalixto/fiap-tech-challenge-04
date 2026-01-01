@@ -8,8 +8,8 @@ from enum import Enum
 from dataclasses import dataclass
 from typing import Optional, Dict
 
-from utils import get_logger
-import config
+from src.utils import get_logger
+from src import config
 
 logger = get_logger(__name__)
 

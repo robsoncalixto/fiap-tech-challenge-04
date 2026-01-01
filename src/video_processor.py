@@ -7,7 +7,7 @@ from typing import Iterator, Dict
 from dataclasses import dataclass
 import numpy as np
 
-from utils import get_logger
+from src.utils import get_logger
 
 logger = get_logger(__name__)
 
