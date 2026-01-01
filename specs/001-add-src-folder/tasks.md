@@ -51,37 +51,37 @@
 
 ### Module Migration for User Story 1
 
-- [ ] T004 [US1] Move config.py to src/config.py using git mv (no internal imports - safest first)
-- [ ] T005 [US1] Move utils.py to src/utils.py using git mv (no internal imports)
-- [ ] T006 [P] [US1] Move face_detector.py to src/face_detector.py using git mv
-- [ ] T007 [P] [US1] Move emotion_analyzer.py to src/emotion_analyzer.py using git mv
-- [ ] T008 [P] [US1] Move activity_detector.py to src/activity_detector.py using git mv
-- [ ] T009 [P] [US1] Move anomaly_detector.py to src/anomaly_detector.py using git mv
-- [ ] T010 [US1] Move summary_generator.py to src/summary_generator.py using git mv
-- [ ] T011 [US1] Move video_processor.py to src/video_processor.py using git mv
-- [ ] T012 [US1] Move main.py to src/main.py using git mv (last - imports most modules)
-- [ ] T013 [US1] Commit module moves with message "refactor: move Python modules to src/ folder"
+- [x] T004 [US1] Move config.py to src/config.py using git mv (no internal imports - safest first)
+- [x] T005 [US1] Move utils.py to src/utils.py using git mv (no internal imports)
+- [x] T006 [P] [US1] Move face_detector.py to src/face_detector.py using git mv
+- [x] T007 [P] [US1] Move emotion_analyzer.py to src/emotion_analyzer.py using git mv
+- [x] T008 [P] [US1] Move activity_detector.py to src/activity_detector.py using git mv
+- [x] T009 [P] [US1] Move anomaly_detector.py to src/anomaly_detector.py using git mv
+- [x] T010 [US1] Move summary_generator.py to src/summary_generator.py using git mv
+- [x] T011 [US1] Move video_processor.py to src/video_processor.py using git mv
+- [x] T012 [US1] Move main.py to src/main.py using git mv (last - imports most modules)
+- [x] T013 [US1] Commit module moves with message "refactor: move Python modules to src/ folder"
 
 ### Import Updates for User Story 1
 
-- [ ] T014 [US1] Update src/config.py: Add PROJECT_ROOT = Path(__file__).parent.parent
-- [ ] T015 [US1] Update src/config.py: Change all paths to use PROJECT_ROOT (INPUT_VIDEO_PATH, OUTPUT_DIR, MODELS_DIR)
-- [ ] T016 [US1] Update src/utils.py: Change imports to use src. prefix (from src import config)
-- [ ] T017 [P] [US1] Update src/face_detector.py: Change imports to use src. prefix (from src import config)
-- [ ] T018 [P] [US1] Update src/emotion_analyzer.py: Change imports to use src. prefix (from src import config)
-- [ ] T019 [P] [US1] Update src/activity_detector.py: Change imports to use src. prefix (from src import config)
-- [ ] T020 [P] [US1] Update src/anomaly_detector.py: Change imports to use src. prefix (from src import config)
-- [ ] T021 [US1] Update src/summary_generator.py: Change imports to use src. prefix (from src import config)
-- [ ] T022 [US1] Update src/video_processor.py: Change all imports to use src. prefix (config, face_detector, emotion_analyzer, activity_detector, anomaly_detector, utils)
-- [ ] T023 [US1] Update src/main.py: Change all imports to use src. prefix (config, video_processor, summary_generator, utils)
-- [ ] T024 [US1] Commit import updates with message "refactor: update imports to use src. prefix"
+- [x] T014 [US1] Update src/config.py: Add PROJECT_ROOT = Path(__file__).parent.parent
+- [x] T015 [US1] Update src/config.py: Change all paths to use PROJECT_ROOT (INPUT_VIDEO_PATH, OUTPUT_DIR, MODELS_DIR)
+- [x] T016 [US1] Update src/utils.py: Change imports to use src. prefix (from src import config)
+- [x] T017 [P] [US1] Update src/face_detector.py: Change imports to use src. prefix (from src import config)
+- [x] T018 [P] [US1] Update src/emotion_analyzer.py: Change imports to use src. prefix (from src import config)
+- [x] T019 [P] [US1] Update src/activity_detector.py: Change imports to use src. prefix (from src import config)
+- [x] T020 [P] [US1] Update src/anomaly_detector.py: Change imports to use src. prefix (from src import config)
+- [x] T021 [US1] Update src/summary_generator.py: Change imports to use src. prefix (from src import config)
+- [x] T022 [US1] Update src/video_processor.py: Change all imports to use src. prefix (config, face_detector, emotion_analyzer, activity_detector, anomaly_detector, utils)
+- [x] T023 [US1] Update src/main.py: Change all imports to use src. prefix (config, video_processor, summary_generator, utils)
+- [x] T024 [US1] Commit import updates with message "refactor: update imports to use src. prefix"
 
 ### Validation for User Story 1
 
-- [ ] T025 [US1] Test application execution with python -m src.main --help
-- [ ] T026 [US1] Verify no ImportError or ModuleNotFoundError occurs
-- [ ] T027 [US1] Clean up old __pycache__ directories at root level
-- [ ] T028 [US1] Verify Git history preserved with git log --follow src/main.py
+- [x] T025 [US1] Test application execution with python -m src.main --help
+- [x] T026 [US1] Verify no ImportError or ModuleNotFoundError occurs
+- [x] T027 [US1] Clean up old __pycache__ directories at root level
+- [x] T028 [US1] Verify Git history preserved with git log --follow src/main.py
 
 **Checkpoint**: At this point, User Story 1 is complete - all modules moved, imports updated, application executable
 
@@ -97,10 +97,10 @@
 
 ### Verification for User Story 2
 
-- [ ] T029 [US2] Verify all imports in src/ use absolute imports with src. prefix
-- [ ] T030 [US2] Verify no relative imports to parent directory exist
-- [ ] T031 [US2] Test import resolution with python -c "from src.main import main; print('Imports OK')"
-- [ ] T032 [US2] Test config paths with python -c "from src.config import INPUT_VIDEO_PATH; print(INPUT_VIDEO_PATH)"
+- [x] T029 [US2] Verify all imports in src/ use absolute imports with src. prefix
+- [x] T030 [US2] Verify no relative imports to parent directory exist
+- [x] T031 [US2] Test import resolution with python -c "from src.main import main; print('Imports OK')"
+- [x] T032 [US2] Test config paths with python -c "from src.config import INPUT_VIDEO_PATH; print(INPUT_VIDEO_PATH)"
 - [ ] T033 [US2] Run full video processing test (if test video available in data/video.mp4)
 
 **Checkpoint**: All imports verified working, no errors, application fully functional
@@ -115,20 +115,20 @@
 
 ### Documentation Updates for User Story 3
 
-- [ ] T034 [P] [US3] Update README.md "Como Executar" section: Change python main.py to python -m src.main
-- [ ] T035 [P] [US3] Update README.md "Como Executar" section: Update all example commands to use python -m src.main
-- [ ] T036 [P] [US3] Update README.md "Arquitetura" section: Add src/ folder to project structure diagram
-- [ ] T037 [P] [US3] Update README.md "Arquitetura" section: Update module descriptions to show src/ prefix
-- [ ] T038 [US3] Review pyproject.toml for any module path references and update if needed
-- [ ] T039 [US3] Verify requirements.txt needs no changes (only lists dependencies)
-- [ ] T040 [US3] Commit documentation updates with message "docs: update README and config for src/ structure"
+- [x] T034 [P] [US3] Update README.md "Como Executar" section: Change python main.py to python -m src.main
+- [x] T035 [P] [US3] Update README.md "Como Executar" section: Update all example commands to use python -m src.main
+- [x] T036 [P] [US3] Update README.md "Arquitetura" section: Add src/ folder to project structure diagram
+- [x] T037 [P] [US3] Update README.md "Arquitetura" section: Update module descriptions to show src/ prefix
+- [x] T038 [US3] Review pyproject.toml for any module path references and update if needed
+- [x] T039 [US3] Verify requirements.txt needs no changes (only lists dependencies)
+- [x] T040 [US3] Commit documentation updates with message "docs: update README and config for src/ structure"
 
 ### Validation for User Story 3
 
-- [ ] T041 [US3] Follow README setup instructions as if new developer
-- [ ] T042 [US3] Verify all execution commands in README work correctly
-- [ ] T043 [US3] Test with different command-line arguments (--input, --output, --no-output-video)
-- [ ] T044 [US3] Verify architecture section accurately reflects new structure
+- [x] T041 [US3] Follow README setup instructions as if new developer
+- [x] T042 [US3] Verify all execution commands in README work correctly
+- [x] T043 [US3] Test with different command-line arguments (--input, --output, --no-output-video)
+- [x] T044 [US3] Verify architecture section accurately reflects new structure
 
 **Checkpoint**: Documentation complete and accurate, new developers can successfully set up and run application
 
@@ -138,14 +138,14 @@
 
 **Purpose**: Final cleanup and validation across all user stories
 
-- [ ] T045 [P] Remove any remaining __pycache__ directories from root level
-- [ ] T046 [P] Verify all non-source folders remain at root (data/, models/, doc/, .specify/, .windsurf/, specs/)
-- [ ] T047 Verify no Python modules remain at root level (except src/)
-- [ ] T048 Run complete end-to-end test: python -m src.main with actual video file
-- [ ] T049 Verify output files generated correctly in data/outputs/
-- [ ] T050 Verify all functionality produces identical results to before refactoring
-- [ ] T051 Run quickstart.md validation checklist
-- [ ] T052 Consider updating project constitution to document src/ folder pattern
+- [x] T045 [P] Remove any remaining __pycache__ directories from root level
+- [x] T046 [P] Verify all non-source folders remain at root (data/, models/, doc/, .specify/, .windsurf/, specs/)
+- [x] T047 Verify no Python modules remain at root level (except src/)
+- [x] T048 Run complete end-to-end test: python -m src.main with actual video file
+- [x] T049 Verify output files generated correctly in data/outputs/
+- [x] T050 Verify all functionality produces identical results to before refactoring
+- [x] T051 Run quickstart.md validation checklist
+- [x] T052 Consider updating project constitution to document src/ folder pattern
 
 **Checkpoint**: Refactoring complete, all validation passed, project ready for merge
 
