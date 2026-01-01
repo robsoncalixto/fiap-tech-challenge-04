@@ -17,14 +17,6 @@ from src.video_processor import load_video, get_video_info, extract_frames
 from src.face_detector import initialize_detector, detect_faces
 from src.emotion_analyzer import load_emotion_model, batch_analyze_emotions
 from src.activity_detector import initialize_activity_detector, analyze_motion
-from src.anomaly_detector import (
-    train_anomaly_model,
-    load_anomaly_model,
-    save_anomaly_model,
-    detect_anomaly,
-    classify_anomaly_type,
-    create_anomaly_record,
-)
 from src.summary_generator import create_summary, generate_text_report
 
 setup_logging()
