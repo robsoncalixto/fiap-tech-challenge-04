@@ -27,7 +27,6 @@ from src.anomaly_detector import (
 )
 from src.summary_generator import create_summary, generate_text_report
 
-# Setup logging
 setup_logging()
 logger = get_logger(__name__)
 
@@ -59,14 +58,12 @@ def parse_arguments():
 
 
 def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count):
-    """Annotate frame with face detections, emotions, and activity"""
     for i, face in enumerate(faces):
         bbox = face.bounding_box
         x, y, w, h = bbox.x, bbox.y, bbox.width, bbox.height
 
         cv2.rectangle(frame, (x, y), (x + w, y + h), config.BOX_COLOR, 2)
 
-        # Add emotion label if available
         if emotions and i < len(emotions):
             emotion = emotions[i]
             label = f"{emotion.emotion_label.value}: {emotion.confidence:.2f}"
@@ -83,7 +80,6 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
             config.FONT_THICKNESS,
         )
 
-    # Display activity info in top-left corner
     if activity_info:
         activity_text = f"Activity: {activity_info}"
         cv2.putText(
@@ -96,7 +92,6 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
             2,
         )
 
-    # Display frame count and face count
     cv2.putText(
         frame,
         f"Frame: {frame_count} | Faces: {len(faces)}",
@@ -111,13 +106,11 @@ def annotate_frame_with_faces(frame, faces, emotions, activity_info, frame_count
 
 
 def main():
-    """Main execution function"""
     args = parse_arguments()
 
     logger.info("=== Sistema de Análise de Expressões Faciais em Vídeo ===")
     logger.info("Iniciando processamento...")
 
-    # Validate input video exists
     if not validate_file_exists(args.input):
         logger.error(f"Erro: Arquivo de vídeo não encontrado: {args.input}")
         logger.error(
@@ -125,19 +118,15 @@ def main():
         )
         sys.exit(1)
 
-    # Ensure output directory exists
     ensure_directory_exists(args.output)
     logger.info(f"Diretório de saída: {args.output}")
 
     try:
-        # Load video
         logger.info(f"Carregando vídeo: {args.input}")
         video_capture = load_video(args.input)
 
-        # Get video information
         video_info = get_video_info(video_capture)
 
-        # Display video information
         logger.info("=" * 50)
         logger.info("INFORMAÇÕES DO VÍDEO:")
         logger.info(f"  Total de Frames: {video_info['total_frames']}")
@@ -146,19 +135,15 @@ def main():
         logger.info(f"  Duração: {video_info['duration']:.2f} segundos")
         logger.info("=" * 50)
 
-        # Initialize face detector
         logger.info("Inicializando detector de rostos...")
         face_cascade = initialize_detector()
 
-        # Initialize emotion analyzer
         logger.info("Inicializando analisador de emoções...")
         emotion_model = load_emotion_model()
 
-        # Initialize activity detector
         logger.info("Inicializando detector de atividades...")
         activity_config = initialize_activity_detector()
 
-        # Setup video writer if output video is requested
         video_writer = None
         if not args.no_output_video:
             import os
@@ -173,7 +158,6 @@ def main():
             )
             logger.info(f"Vídeo de saída será salvo em: {output_video_path}")
 
-        # Extract and process frames
         logger.info("Processando frames do vídeo...")
         import time
 
@@ -188,17 +172,14 @@ def main():
         for frame in extract_frames(video_capture):
             frame_count += 1
 
-            # Detect faces in frame
             faces = detect_faces(frame.image_data, face_cascade)
             total_faces_detected += len(faces)
 
-            # Analyze emotions for detected faces
             emotions = []
             if faces:
                 face_images = [face.face_image for face in faces]
                 emotions = batch_analyze_emotions(face_images, emotion_model)
 
-            # Analyze motion/activity
             avg_face_area = (
                 sum(f.bounding_box.width * f.bounding_box.height for f in faces)
                 / len(faces)
@@ -214,7 +195,6 @@ def main():
             )
             activity_info = motion_analysis.activity_type.value
 
-            # Collect frame data for summary
             frames_data.append(
                 {
                     "frame_number": frame_count,
@@ -224,33 +204,26 @@ def main():
                 }
             )
 
-            # Annotate frame with face detections, emotions, and activity
             annotated_frame = annotate_frame_with_faces(
                 frame.image_data.copy(), faces, emotions, activity_info, frame_count
             )
 
-            # Store current frame for next iteration
             prev_frame_data = frame.image_data.copy()
 
-            # Write annotated frame to output video
             if video_writer is not None:
                 video_writer.write(annotated_frame)
 
-            # Log progress every N frames
             if frame_count % config.LOG_EVERY_N_FRAMES == 0:
                 logger.info(
                     f"Processados {frame_count} frames, {len(faces)} rostos detectados neste frame"
                 )
 
-        # Release video writer
         if video_writer is not None:
             video_writer.release()
             logger.info("Vídeo de saída salvo com sucesso")
 
-        # Calculate processing time
         processing_time = time.time() - start_time
 
-        # Generate summary report
         logger.info("Gerando relatório resumido...")
         import os
 
@@ -267,7 +240,6 @@ def main():
         report_path = os.path.join(args.output, "relatorio.txt")
         generate_text_report(summary, report_path)
 
-        # Final summary
         logger.info("=" * 50)
         logger.info("PROCESSAMENTO CONCLUÍDO!")
         logger.info(f"Total de frames processados: {frame_count}")

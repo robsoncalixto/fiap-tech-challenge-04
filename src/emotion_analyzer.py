@@ -33,7 +33,6 @@ class EmotionClassification:
     probabilities: Dict[EmotionType, float]
 
 
-# Global variable to store loaded model
 _emotion_model = None
 
 

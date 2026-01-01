@@ -7,7 +7,6 @@ import logging
 from pathlib import Path
 
 
-# Custom Exceptions
 class VideoProcessingError(Exception):
     """Base exception for video processing errors"""
 
@@ -38,7 +37,6 @@ class AnomalyDetectionError(Exception):
     pass
 
 
-# Path validation functions
 def validate_file_exists(file_path: str) -> bool:
     """
     Validate that a file exists
@@ -88,7 +86,6 @@ def get_absolute_path(relative_path: str) -> str:
     return os.path.abspath(relative_path)
 
 
-# Type conversion functions
 def safe_int_conversion(value, default=0):
     """
     Safely convert value to integer
@@ -123,7 +120,6 @@ def safe_float_conversion(value, default=0.0):
         return default
 
 
-# Logging configuration
 def setup_logging(log_level=logging.INFO):
     """
     Configure logging for the application
