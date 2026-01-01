@@ -233,23 +233,22 @@ Tempo de Processamento: 300.5 segundos
 
 ### Descrição dos Módulos
 
-#### 1. `main.py` - Orquestração Principal
-#### 2. `video_processor.py` - Processamento de Vídeo
-#### 3. `face_detector.py` - Detecção Facial
-#### 4. `emotion_analyzer.py` - Análise de Emoções
-#### 5. `activity_detector.py` - Detecção de Atividades
-#### 6. `anomaly_detector.py` - Detecção de Anomalias
-#### 7. `summary_generator.py` - Geração de Relatórios
-#### 8. `config.py` - Configurações
-#### 9. `utils.py` - Utilitários
+- `main.py` - Orquestração Principal
+- `video_processor.py` - Processamento de Vídeo
+- `face_detector.py` - Detecção Facial
+- `emotion_analyzer.py` - Análise de Emoções
+- `activity_detector.py` - Detecção de Atividades
+- `anomaly_detector.py` - Detecção de Anomalias
+- `summary_generator.py` - Geração de Relatórios
+- `config.py` - Configurações
+- `utils.py` - Utilitários
 
 ---
 
 ## Referência
-- **Tech Challenge - Fase 4:** https://github.com/robsoncalixto/tech_challenge_04
-
-- **FER2013 Dataset**: https://www.kaggle.com/datasets/msambare/fer2013
-- **OpenCV Optical Flow**: https://docs.opencv.org/4.x/d4/dee/tutorial_optical_flow.html
-- **Isolation Forest**: https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html
-- **FER Library**: https://github.com/justinshenk/fer
-- **Haar Cascades**: https://github.com/opencv/opencv/tree/master/data/haarcascades
+- [**Tech Challenge - Fase 4**](http://github.com/robsoncalixto/fiap-tech-challenge-04/blob/master/doc/Tech%20Challenge%20-%20IADT%20-%20Fase%204.pdf)
+- [**FER2013 Dataset**](https://www.kaggle.com/datasets/msambare/fer2013)
+- [**OpenCV Optical Flow**](https://docs.opencv.org/4.x/d4/dee/tutorial_optical_flow.html)
+- [**Isolation Forest**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html)
+- [**FER Library**](https://github.com/justinshenk/fer)
+- [**Haar Cascades**](https://github.com/opencv/opencv/tree/master/data/haarcascades)
