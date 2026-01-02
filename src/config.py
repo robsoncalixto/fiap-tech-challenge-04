@@ -10,10 +10,6 @@ INPUT_VIDEO_PATH = (
     PROJECT_ROOT / "data" / "Facial_Recognition_Diverse_Activities_Analysis.mp4"
 )
 OUTPUT_DIR = PROJECT_ROOT / "data" / "outputs"
-MODELS_DIR = PROJECT_ROOT / "models"
-EMOTION_MODEL_PATH = MODELS_DIR / "emotion_model.h5"
-ANOMALY_MODEL_PATH = MODELS_DIR / "anomaly_model.pkl"
-FACE_DETECTION_CONFIDENCE = 0.5
 ACTIVITY_THRESHOLD_LOW = 2.0
 ACTIVITY_THRESHOLD_HIGH = 10.0
 ANOMALY_THRESHOLD = -0.5

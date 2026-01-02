@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Projeto de script para análise de vídeo e realizar análises de reconhecimento facial, detecção de emoções, identificação de atividades e geração de relatórios automatizados. O projeto utiliza técnicas de visão computacional e aprendizado de máquina.
+Projeto de análise de vídeo e realizar reconhecimento facial, detecção de emoções, identificação de atividades e geração de relatórios automatizados. O projeto utiliza técnicas de visão computacional e aprendizado de máquina.
 
 **Projeto Acadêmico**: FIAP Tech Challenge - Fase 4  
 **Curso**: Pós-graduação em Inteligência Artificial para Desenvolvedores  
@@ -24,7 +24,7 @@ Projeto de script para análise de vídeo e realizar análises de reconhecimento
 5. [Como Executar](#como-executar)
 6. [Variáveis de Ambiente](#variáveis-de-ambiente)
 7. [Saídas Geradas](#saídas-geradas)
-8. [Arquitetura](#arquitetura)
+8. [Referência](#referência)
 
 ---
 
@@ -36,19 +36,13 @@ Projeto de script para análise de vídeo e realizar análises de reconhecimento
 - Rótulos de emoção com confiança
 - Informação de atividade no canto superior
 - Contador de frames e rostos detectados
+- Geração de relatório consolidado no final da execução
 
 ## Pré-requisitos
 
 - **Python**: 3.12 ou superior (obrigatório)
 - **uv**: Gerenciador de pacotes Python (recomendado) ou pip
 - **Git**: Para clonar o repositório
-
-### Hardware Recomendado
-
-- **CPU**: Processador multi-core (4+ cores recomendado)
-- **RAM**: Mínimo 8GB (16GB recomendado para vídeos grandes)
-- **Armazenamento**: 2GB livres para dependências e saídas
-- **GPU**: Opcional (acelera processamento com TensorFlow)
 
 ---
 
@@ -138,7 +132,7 @@ python -m src.main \
 
 ## Variáveis de Ambiente
 
-O sistema utiliza configurações definidas em `config.py`. Não há variáveis de ambiente obrigatórias, mas você pode personalizar:
+O sistema utiliza configurações definidas em `config.py`. Não há variáveis de ambiente obrigatórias, mas pode personalizar:
 
 ### Configurações Disponíveis
 
@@ -149,25 +143,7 @@ Edite o arquivo `config.py` para ajustar:
 INPUT_VIDEO_PATH = "data/video.mp4"
 OUTPUT_DIR = "data/outputs/"
 MODELS_DIR = "models/"
-
-# Detecção Facial
-FACE_DETECTION_SCALE_FACTOR = 1.1
-FACE_DETECTION_MIN_NEIGHBORS = 5
-FACE_MIN_SIZE = (30, 30)
-
-# Detecção de Atividades
-ACTIVITY_THRESHOLD_LOW = 2.0
-ACTIVITY_THRESHOLD_HIGH = 10.0
-
-# Detecção de Anomalias
-ANOMALY_THRESHOLD = -0.5
-
-# Anotação de Vídeo
-BOX_COLOR = (0, 255, 0)  # Verde (BGR)
-TEXT_COLOR = (36, 255, 12)  # Verde claro (BGR)
-FONT_SCALE = 0.9
-FONT_THICKNESS = 2
-
+...
 # Logging
 LOG_EVERY_N_FRAMES = 30
 ```
@@ -189,9 +165,8 @@ Total: 1500 frames | 3847 rostos | 300.5s
 
 ### Arquivos de Saída
 
-#### 1. Vídeo Anotado: `data/outputs/output_video.mp4`
-
-#### 2. Relatório Textual: `data/outputs/relatorio.txt`
+- 1. Vídeo Anotado: `data/outputs/output_video.mp4`
+- 2. Relatório Textual: `data/outputs/relatorio.txt`
 
 ```
 ============================================================
@@ -229,30 +204,14 @@ Tempo de Processamento: 300.5 segundos
 
 ---
 
-## Arquitetura
+- 3. Exemplo do Vídeo de Saída
 
-### Estrutura do Projeto
-
-```
-fiap-tech-challenge-04/
-├── src/                    # Código fonte da aplicação
-│   ├── main.py            # Orquestração Principal
-│   ├── video_processor.py # Processamento de Vídeo
-│   ├── face_detector.py   # Detecção Facial
-│   ├── emotion_analyzer.py # Análise de Emoções
-│   ├── activity_detector.py # Detecção de Atividades
-│   ├── anomaly_detector.py # Detecção de Anomalias
-│   ├── summary_generator.py # Geração de Relatórios
-│   ├── config.py          # Configurações
-│   └── utils.py           # Utilitários
-├── data/                   # Dados de entrada e saída
-├── models/                 # Modelos treinados
-└── doc/                    # Documentação
-```
+![image](./doc/img/output_exemaple_detector.png)
 
 ---
 
 ## Referência
+
 - [**Tech Challenge - Fase 4**](http://github.com/robsoncalixto/fiap-tech-challenge-04/blob/master/doc/Tech%20Challenge%20-%20IADT%20-%20Fase%204.pdf)
 - [**FER2013 Dataset**](https://www.kaggle.com/datasets/msambare/fer2013)
 - [**OpenCV Optical Flow**](https://docs.opencv.org/4.x/d4/dee/tutorial_optical_flow.html)
