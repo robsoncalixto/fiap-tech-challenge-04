@@ -31,12 +31,6 @@ class ModelLoadError(Exception):
     pass
 
 
-class AnomalyDetectionError(Exception):
-    """Exception for anomaly detection errors"""
-
-    pass
-
-
 def validate_file_exists(file_path: str) -> bool:
     """
     Validate that a file exists

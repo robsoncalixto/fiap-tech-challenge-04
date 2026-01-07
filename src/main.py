@@ -15,7 +15,7 @@ from src.utils import (
 )
 from src.video_processor import load_video, get_video_info, extract_frames
 from src.face_detector import initialize_detector, detect_faces
-from src.emotion_analyzer import load_emotion_model, batch_analyze_emotions
+from src.emotion_analyzer_deepface import load_emotion_model, batch_analyze_emotions
 from src.activity_detector import initialize_activity_detector, analyze_motion
 from src.summary_generator import create_summary, generate_text_report
 
@@ -180,7 +180,6 @@ def main():
         total_faces_detected = 0
         prev_frame_data = None
         frames_data = []
-        anomalies = []
 
         for frame in extract_frames(video_capture):
             frame_count += 1
@@ -246,7 +245,6 @@ def main():
             duration=video_info["duration"],
             fps=video_info["fps"],
             frames_data=frames_data,
-            anomalies=anomalies,
             processing_time=processing_time,
         )
 
