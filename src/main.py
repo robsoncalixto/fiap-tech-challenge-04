@@ -15,7 +15,7 @@ from src.utils import (
 )
 from src.video_processor import load_video, get_video_info, extract_frames
 from src.face_detector import initialize_detector, detect_faces
-from src.emotion_analyzer import load_emotion_model, batch_analyze_emotions
+from src.emotion_analyzer_deepface import load_emotion_model, batch_analyze_emotions
 from src.activity_detector import initialize_activity_detector, analyze_motion
 from src.summary_generator import create_summary, generate_text_report
 
