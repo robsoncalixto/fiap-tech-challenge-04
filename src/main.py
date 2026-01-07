@@ -180,7 +180,6 @@ def main():
         total_faces_detected = 0
         prev_frame_data = None
         frames_data = []
-        anomalies = []
 
         for frame in extract_frames(video_capture):
             frame_count += 1
@@ -246,7 +245,6 @@ def main():
             duration=video_info["duration"],
             fps=video_info["fps"],
             frames_data=frames_data,
-            anomalies=anomalies,
             processing_time=processing_time,
         )
 

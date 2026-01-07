@@ -195,9 +195,6 @@ Moderate Movement: 890 frames (59.3%)
 Static: 450 frames (30.0%)
 Rapid Movement: 160 frames (10.7%)
 
---- ANOMALIAS DETECTADAS ---
-Total: 0
-
 Tempo de Processamento: 300.5 segundos
 ============================================================
 ```
@@ -215,6 +212,5 @@ Tempo de Processamento: 300.5 segundos
 - [**Tech Challenge - Fase 4**](http://github.com/robsoncalixto/fiap-tech-challenge-04/blob/master/doc/Tech%20Challenge%20-%20IADT%20-%20Fase%204.pdf)
 - [**FER2013 Dataset**](https://www.kaggle.com/datasets/msambare/fer2013)
 - [**OpenCV Optical Flow**](https://docs.opencv.org/4.x/d4/dee/tutorial_optical_flow.html)
-- [**Isolation Forest**](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html)
 - [**FER Library**](https://github.com/justinshenk/fer)
 - [**Haar Cascades**](https://github.com/opencv/opencv/tree/master/data/haarcascades)

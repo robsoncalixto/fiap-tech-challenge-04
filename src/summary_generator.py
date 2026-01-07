@@ -22,7 +22,6 @@ class AnalysisSummary:
     total_faces_detected: int
     emotion_distribution: Dict[str, int]
     activity_distribution: Dict[str, int]
-    anomalies_detected: List
     processing_time: float
 
 
@@ -32,7 +31,6 @@ def create_summary(
     duration: float,
     fps: float,
     frames_data: List[Dict],
-    anomalies: List,
     processing_time: float,
 ) -> AnalysisSummary:
     """
@@ -44,7 +42,6 @@ def create_summary(
         duration: Video duration in seconds
         fps: Frames per second
         frames_data: List of dictionaries with frame analysis data
-        anomalies: List of detected anomalies
         processing_time: Total processing time in seconds
 
     Returns:
@@ -76,7 +73,6 @@ def create_summary(
         total_faces_detected=total_faces,
         emotion_distribution=dict(emotion_counts),
         activity_distribution=dict(activity_counts),
-        anomalies_detected=anomalies,
         processing_time=processing_time,
     )
 
@@ -134,24 +130,6 @@ def generate_text_report(summary: AnalysisSummary, output_path: str) -> None:
         ):
             percentage = (count / total_activities * 100) if total_activities > 0 else 0
             lines.append(f"{activity}: {count} frames ({percentage:.1f}%)")
-        lines.append("")
-
-    # Anomaly detection
-    lines.append("--- ANOMALIAS DETECTADAS ---")
-    lines.append(f"Total: {len(summary.anomalies_detected)}")
-    lines.append("")
-
-    if summary.anomalies_detected:
-        for i, anomaly in enumerate(summary.anomalies_detected[:10], 1):
-            timestamp = anomaly.get("timestamp", 0)
-            anomaly_type = anomaly.get("type", "Unknown")
-            severity = anomaly.get("severity", 0)
-            lines.append(
-                f"{i}. [{timestamp:.1f}s] {anomaly_type} (severidade: {severity:.2f})"
-            )
-
-        if len(summary.anomalies_detected) > 10:
-            lines.append(f"... e mais {len(summary.anomalies_detected) - 10} anomalias")
         lines.append("")
 
     # Processing information
